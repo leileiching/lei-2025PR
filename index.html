@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lei · 2025 Self Promotion</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg-soft:#12192b;
+      --accent:#6fb6e9;
+      --accent-soft:rgba(111,182,233,.18);
+      --text-main:#f7f7fb;
+      --text-sub:#c2c7da;
+      --border-subtle:rgba(255,255,255,.08);
+      --chip-bg:rgba(255,255,255,.06);
+      --chip-border:rgba(255,255,255,.18);
+      --card-radius:20px;
+      --section-gap:80px;
+      --max-width:1120px;
+    }
+
+    *{ box-sizing:border-box; }
+
+    html,body{
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--text-main);
+      font-family:"Inter","Noto Sans TC",system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+      scroll-behavior:smooth;
+    }
+
+    body{ min-height:100vh; }
+
+    /* ===== Layout ===== */
+    .page-wrapper{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+      padding:0 20px;
+    }
+
+    /* ===== Top Nav ===== */
+    .top-nav{
+      position:sticky;
+      top:0;
+      z-index:20;
+      backdrop-filter:blur(16px);
+      background:linear-gradient(to bottom, rgba(11,16,32,.9), rgba(11,16,32,.6), transparent);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+
+    .top-nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:14px 20px 10px;
+      gap:16px;
+    }
+
+    .brand-mark{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:15px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:600;
+    }
+
+    .brand-badge{
+      width:12px;
+      height:28px;
+      border-radius:0;
+      background:var(--accent);
+      box-shadow:0 0 18px rgba(21,32,79,.75);
+      border:1px solid rgba(0,0,0,.3);
+    }
+
+    .brand-sub{
+      font-size:11px;
+      color:var(--text-sub);
+      text-transform:none;
+      letter-spacing:.08em;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    .nav-links a{
+      color:var(--text-sub);
+      text-decoration:none;
+      padding-bottom:3px;
+      border-bottom:1px solid transparent;
+      transition:color .2s ease, border-color .2s ease, transform .2s ease;
+    }
+
+    .nav-links a:hover{
+      color:var(--accent);
+      border-color:var(--accent);
+      transform:translateY(-1px);
+    }
+
+    .nav-cta{
+      padding:6px 14px;
+      border-radius:999px;
+      border:1px solid var(--accent-soft);
+      background:radial-gradient(circle at 0% 0%, rgba(111,182,233,.18), transparent 60%);
+      font-size:12px;
+      font-weight:500;
+      color:var(--accent);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+    }
+
+    .nav-cta span{ font-size:16px; }
+
+    /* ===== Hero Intro（唯一保留的 Hero）===== */
+    .hero-intro{
+      position:relative;
+      height:150vh;
+      width:100%;
+      overflow:hidden;
+      padding:0;
+    }
+
+    /* 背景光影（只給 hero 用，不要全頁固定） */
+    .hero-intro::before{
+      content:"";
+      position:absolute;
+      inset:-30%;
+      opacity:.9;
+      pointer-events:none;
+      z-index:0;
+      filter:blur(2px);
+    }
+
+    /* 中央固定大字 */
+    .hero-fixed-text{
+      position:sticky;
+      top:30%;
+      transform:translateY(-50%);
+      text-align:center;
+      font-size:clamp(38px, 6vw, 96px);
+      font-weight:700;
+      line-height:1.1;
+      letter-spacing:-.01em;
+      color:#fff;
+      z-index:3;
+      pointer-events:none;
+      padding:0 20px;
+      text-shadow:0 18px 60px rgba(0,0,0,.55);
+    }
+
+    .hero-name{
+  color:#6fb6e9;
+}
+
+
+    /* Hero 圖片層 */
+    .hero-bg-image{
+      position:absolute;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(92vw, 1920px);
+      height:min(120vh, 1080px);
+      border-radius:0px;
+      overflow:hidden;
+      border:0px;
+      box-shadow:0;
+      background-image:url("./lei-profile.png");
+      background-size:cover;
+      background-position:center;
+      background-repeat:no-repeat;
+
+      opacity:0;
+      transition:opacity .8s ease-out, transform 1.2s ease-out;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    /* 捲動後淡入、微微放大 */
+    body.scrolled .hero-bg-image{
+      opacity:.55;
+      transform:translateX(-50%) scale(1.05);
+    }
+
+    /* ===== Sections ===== */
+    section{ padding:0 0 var(--section-gap); }
+
+    #about{ padding-top:0px; } /* Hero → About 的呼吸空間 */
+
+    .section-header{ margin-bottom:22px; }
+
+    .section-eyebrow{
+      font-size:12px;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:4px;
+    }
+
+    .section-title{
+      font-size:22px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin:0 0 2px;
+    }
+
+    .section-subtitle{
+      font-size:14px;
+      color:var(--text-sub);
+      max-width:560px;
+    }
+
+    /* ===== Growth Timeline ===== */
+    .growth-timeline{ margin-top:14px; margin-bottom:4px; }
+
+    .growth-label{
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:rgba(197,208,233,.9);
+      margin-bottom:8px;
+    }
+
+    .growth-steps{
+      display:flex;
+      flex-wrap:nowrap;
+      gap:8px;
+      align-items:center;
+      overflow-x:auto;
+      padding-bottom:4px;
+      -webkit-overflow-scrolling:touch;
+    }
+
+    .growth-step{
+      white-space:nowrap;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(111,182,233,.4);
+      background:rgba(6,13,30,.95);
+      font-size:12px;
+      color:var(--text-sub);
+    }
+
+    .growth-step:last-of-type{
+      border-color:rgba(255,216,140,.8);
+      background:
+        radial-gradient(circle at 0 0, rgba(255,216,140,.24), transparent 60%),
+        rgba(6,13,30,.95);
+      color:#f7f1df;
+    }
+
+    .growth-arrow{ font-size:14px; color:rgba(255,255,255,.55); }
+
+    /* ===== About ===== */
+    .about-layout{
+      display:grid;
+      grid-template-columns:minmax(0, 1.8fr) minmax(0, 2.2fr);
+      gap:36px;
+      align-items:start;
+    }
+
+    .about-main p{
+      font-size:14px;
+      line-height:1.9;
+      color:var(--text-sub);
+      margin:0 0 12px;
+    }
+
+    .about-main p:last-child{ margin-bottom:0; }
+
+    /* ===== Expertise ===== */
+    .grid-3{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .card{
+      border-radius:var(--card-radius);
+      border:1px solid var(--border-subtle);
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,.06), transparent 55%),
+        rgba(10,14,32,.96);
+      padding:16px 16px 18px;
+      box-shadow:0 12px 26px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .card-eyebrow{
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      color:var(--accent);
+      margin-bottom:6px;
+    }
+
+    .card-title{ font-size:16px; margin-bottom:6px; }
+
+    .card-body{
+      font-size:13px;
+      color:var(--text-sub);
+      line-height:1.7;
+      margin-bottom:10px;
+    }
+
+    .card-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      font-size:11px;
+    }
+
+    .card-tag-pill{
+      padding:4px 8px;
+      border-radius:999px;
+      background:var(--chip-bg);
+      border:1px solid var(--chip-border);
+    }
+
+    /* ===== Work ===== */
+    .work-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .work-card{
+      border-radius:20px;
+      overflow:hidden;
+      border:1px solid var(--border-subtle);
+      background:rgba(10,13,28,.96);
+      display:flex;
+      flex-direction:column;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .work-thumb{
+      position:relative;
+      padding-top:60%;
+      background:radial-gradient(circle at 10% 0%, #a8ddff, #03213f);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      overflow:hidden;
+    }
+
+
+    /* Motion Graphic */
+.work-01 .work-thumb{
+  background-image: url("work-mg-cover.png");
+}
+
+/* MFC 型錄 */
+.work-02 .work-thumb{
+  background-image: url("work-02-cover.png");
+}
+
+/* D&S 年鑑 */
+.work-03 .work-thumb{
+  background-image: url("work-03-cover.png");
+}
+
+/* AI Workflow */
+.work-04 .work-thumb{
+  background-image: url("work-04-cover.png");
+}
+
+/* Platform Website */
+.work-05 .work-thumb{
+  background-image: url("work-05-cover.png");
+}
+
+/* Others */
+.work-06 .work-thumb{
+  background-image: url("work-06-cover.png");
+}
+
+
+
+
+    
+
+
+    .work-body{ padding:14px 16px 16px; }
+
+    .work-title-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:8px;
+      margin-bottom:8px;
+    }
+
+    .work-title{ font-size:15px; font-weight:600; }
+    .work-year{
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--text-sub);
+    }
+
+    .work-desc{
+      font-size:13px;
+      color:var(--text-sub);
+      line-height:1.7;
+      margin-bottom:10px;
+    }
+
+    .work-meta-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      font-size:11px;
+    }
+
+    .work-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+
+    .work-tag{
+      padding:3px 8px;
+      border-radius:999px;
+      border:1px solid var(--chip-border);
+      background:var(--chip-bg);
+      color:var(--text-sub);
+    }
+
+    .work-role{
+      color:var(--accent);
+      font-size:11px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+   
+
+    /* ===== AI Efficiency ===== */
+    .efficiency-grid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:18px;
+    }
+
+    .efficiency-card{
+      border-radius:18px;
+      border:1px solid var(--border-subtle);
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,.08), transparent 60%),
+        rgba(8,10,26,.98);
+      padding:16px 16px 18px;
+      font-size:13px;
+      color:var(--text-sub);
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .eff-metric-label{
+      font-size:13px;
+      font-weight:500;
+      margin-bottom:4px;
+      color:var(--text-main);
+    }
+
+    .eff-number-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      font-size:12px;
+      margin-bottom:2px;
+    }
+
+    .eff-tag{
+      padding:2px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
+      font-size:11px;
+      color:var(--text-sub);
+    }
+
+    .eff-tag-2025{
+      border-color:rgba(111,182,233,.8);
+      color:var(--accent);
+      background:rgba(111,182,233,.1);
+    }
+
+    .eff-value{ font-size:13px; color:var(--text-main); }
+
+    .eff-bar-track{
+      position:relative;
+      margin-top:8px;
+      margin-bottom:8px;
+      height:20px;
+      border-radius:999px;
+      background:rgba(9,14,30,.9);
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.06);
+    }
+
+    .eff-bar{
+      position:absolute;
+      top:1px;
+      bottom:1px;
+      border-radius:999px;
+      left:2px;
+    }
+
+    .eff-bar-2024{
+      width:40%;
+      background:linear-gradient(90deg, rgba(120,133,164,.7), rgba(173,186,212,.9));
+    }
+
+    .eff-bar-2025{
+      width:60%;
+      background:linear-gradient(90deg, rgba(111,182,233,.2), rgba(111,182,233,1));
+      box-shadow:0 0 10px rgba(111,182,233,.8);
+    }
+
+    .eff-bar-2025-70{ width:70%; }
+    .eff-bar-2025-65{ width:65%; }
+
+    .eff-note{
+      font-size:11px;
+      line-height:1.7;
+      color:var(--text-sub);
+    }
+
+    .eff-pill-remark{
+      margin-top:10px;
+      font-size:11px;
+      color:rgba(197,208,233,.9);
+    }
+
+    /* ===== Contact ===== */
+    .contact-section-inner{
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.16);
+      background:
+        radial-gradient(circle at 0 0, rgba(255,255,255,.08), transparent 60%),
+        linear-gradient(135deg, #11172c, #080b16);
+      padding:22px 18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+
+    .contact-text{ max-width:520px; }
+
+    .contact-title{
+      font-size:18px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin:0 0 6px;
+    }
+
+    .contact-body{
+      font-size:14px;
+      color:var(--text-sub);
+      line-height:1.8;
+    }
+
+    .contact-actions{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      min-width:210px;
+    }
+
+    .contact-link-label{
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--text-sub);
+    }
+
+    .contact-link{
+      font-size:13px;
+      text-decoration:none;
+      color:var(--accent);
+      border-radius:999px;
+      border:1px solid var(--accent-soft);
+      padding:7px 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background:rgba(0,0,0,.2);
+    }
+
+    .contact-link span{ font-size:16px; }
+
+    /* ===== Unified hover for all cards ===== */
+    .card:hover,
+    .about-meta-card:hover,
+    .work-card:hover,
+    .number-card:hover,
+    .efficiency-card:hover,
+    .contact-section-inner:hover{
+      transform:translateY(-4px);
+      border-color:rgba(111,182,233,.9);
+      box-shadow:0 18px 38px rgba(0,0,0,.7);
+    }
+
+    /* ===== Scroll-in animation ===== */
+    .fade-in{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .6s ease, transform .6s ease;
+    }
+
+    .fade-in.is-visible{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width:960px){
+      .numbers-grid{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .grid-3{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+      .work-grid{ grid-template-columns:minmax(0, 1fr); }
+      .efficiency-grid{ grid-template-columns:minmax(0, 1fr); }
+      .about-layout{ grid-template-columns:minmax(0, 1fr); }
+    }
+
+    @media (max-width:640px){
+      .nav-links{ display:none; }
+      .grid-3,
+      .numbers-grid{ grid-template-columns:minmax(0, 1fr); }
+      .contact-section-inner{ flex-direction:column; align-items:flex-start; }
+      .hero-bg-image{ width:92vw; height:70vh; top:34%; }
+      .hero-fixed-text{ top:28%; }
+    }
+
+    /* ===== About Parallax Background ===== */
+.about-section{
+  position: relative;
+  overflow: hidden;
+  background-color: var(--bg); /* #0b1020，跟 body 同一色 */
+  padding: 0; /* 你原本留給 Hero→About 的呼吸空間 */
+  min-height: 180vh;
+
+}
+
+.about-section .container{
+  position: relative;
+  z-index: 2;
+}
+
+.about-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: url("lei-about.gif"); /* 只放 gif */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 深色遮罩獨立出來，想多深改這裡 */
+.about-bg::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(11,16,32,0.55); /* 調 0.3～0.6 去試 */
+}
+
+
+/* ===== About Section Height Control ===== */
+.about-section{
+  position: relative;
+  overflow: hidden;
+
+  /* 🔥 關鍵：給背景圖足夠的捲動空間 */
+  min-height: 80vh;
+
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* ✅ 文字層：用 flex 垂直置中 */
+.about-content{
+  position: relative;
+  z-index: 2;
+
+  /* 讓 container 撐滿 section 高度 */
+  min-height: 100%;
+
+  /* 垂直置中關鍵 */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* 如果你還希望略偏上/偏下，就調這個 */
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+/* ===== Modal ===== */
+.tw-modal{
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: none;
+}
+
+.tw-modal.is-open{ display: block; }
+
+.tw-modal__backdrop{
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.66);
+  backdrop-filter: blur(10px);
+}
+
+.tw-modal__panel{
+  position: relative;
+  width: min(980px, calc(100vw - 28px));
+  max-height: min(86vh, 760px);
+  margin: 7vh auto 0;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(10, 14, 32, 0.92);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+  overflow: hidden;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity .18s ease, transform .18s ease;
+}
+
+.tw-modal.is-open .tw-modal__panel{
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.tw-modal__close{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  cursor: pointer;
+}
+
+.tw-modal__header{
+  padding: 16px 18px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.tw-modal__title{
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-main);
+}
+
+.tw-modal__body{
+  padding: 14px 18px 18px;
+  overflow: auto;
+  max-height: calc(min(86vh, 760px) - 64px);
+}
+
+/* media 佔滿、保持比例 */
+.tw-modal__media{
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+  background: rgba(0,0,0,0.25);
+}
+
+.tw-modal__media img{
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tw-modal__media iframe,
+.tw-modal__media video{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: 0;
+}
+
+/* ===== Modal Carousel ===== */
+.tw-modal__carousel{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tw-modal__nav{
+  flex: 0 0 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(0,0,0,0.35);
+  color: #fff;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .18s ease, transform .18s ease, border-color .18s ease;
+}
+
+.tw-modal__nav:hover{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(111,182,233,0.8);
+  transform: translateY(-1px);
+}
+
+.tw-modal__nav:disabled{
+  opacity: 0.3;
+  cursor: default;
+  transform: none;
+}
+
+/* 讓 media 區塊吃掉中間空間 */
+.tw-modal__media{
+  flex: 1 1 auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+  background: rgba(0,0,0,0.25);
+}
+
+
+/* ===== Rocket GIF ===== */
+.section-divider{
+  padding-top: 32px;
+  padding-bottom: 80px; /* 👈 重點：底部留白 */
+}
+
+
+.section-divider .container{
+  display:flex;
+  justify-content:center;
+}
+
+.divider-gif{
+  width: min(1080px, 92vw);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.divider-gif img{
+  width: 100%;
+  height: auto;
+  display:block;
+  opacity: .92;              /* 你可調整 gif 的「存在感」 */
+}
+
+/* ===== Ending Hero-style Section ===== */
+/* ===== ENDING SECTION ===== */
+.ending-section{
+  position: relative;
+  min-height: 120vh;
+  padding: 160px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+
+  /* 統一底色：保持與全站背景一致 */
+  background-color: var(--bg); /* #0b1020 */
+}
+
+/* 背景 GIF 只放原圖 */
+.ending-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+
+  background-image: url("lei-ending.gif");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  opacity: .3; /* 初始不要太亮 */
+  transform: translate3d(0, 40px, 0) scale(1.02);
+  transition: opacity .9s ease-out, transform 1.4s ease-out;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+/* 🔥 深色遮罩獨立控制：避免顏色變成一整塊不同色 */
+.ending-bg::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(11,16,32,.65); /* 可自由調整 .35～.6 */
+}
+
+/* 淡入效果 + 視差位移 */
+.ending-section.is-visible .ending-bg{
+  opacity: .65;
+  transform: translate3d(0,0,0) scale(1.06);
+}
+
+/* 文字層 */
+.ending-inner{
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.ending-title{
+  margin: 0 0 18px;
+  font-size: clamp(28px, 4.2vw, 40px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* PURPOSE & CLARITY 上色 */
+.ending-title .highlight{
+  color: #6fb6e9;
+}
+
+.ending-body{
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-sub);
+}
+
+
+.accent-text{
+  color: #6fb6e9;
+}
+
+
+
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <!-- Top nav -->
+    <header class="top-nav">
+      <div class="container top-nav-inner">
+        <div class="brand-mark">
+          <div class="brand-badge"></div>
+          <div>
+            <div>Lei · Visual Designer</div>
+            <div class="brand-sub">2025 SELF PROMOTION</div>
+          </div>
+        </div>
+        <nav class="nav-links">
+          <a href="#about">About</a>
+          <a href="#expertise">Expertise</a>
+          <a href="#work">Selected Work</a>
+          <a href="#testimonials">AI Workflow</a>
+          <a href="#contact" class="nav-cta"><span>↘</span></a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero Intro：大字 + 背景圖捲動出現 -->
+<section class="hero-intro" id="hero">
+  <div class="hero-fixed-text">
+    Hi, I’m <span class="hero-name">Lei</span>.<br />A visual designer.
+  </div>
+  <div class="hero-bg-image" aria-hidden="true"></div>
+</section>
+
+
+      <!-- About -->
+      <section id="about" class="fade-in about-section">
+          <div class="about-bg" aria-hidden="true"></div>
+        <div class="container about-content">
+          <div class="section-header">
+            <div class="section-eyebrow">About Lei</div>
+            <h2 class="section-title">用設計整理世界的雜音</h2>
+            <p class="section-subtitle">
+              從「問題與情境」出發，先瞭解要替誰解決什麼問題，再決定要用什麼媒介（網頁、海報、動態影像、AI 生成視覺、或三者混搭）傳達。
+            </p>
+
+            <div class="growth-timeline">
+              <div class="growth-label">成長路徑 · From print to AI & code</div>
+              <div class="growth-steps">
+                <span class="growth-step">平面行銷素材製作</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step">實體輸出物製作</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step">影片企劃·拍攝·剪輯</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step">網頁設計與 UI / UX 優化</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step">Motion Graphic 製作</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step">AI 測試與導入</span>
+                <span class="growth-arrow">→</span>
+                <span class="growth-step">Vibe Coder（笑）</span>
+              </div>
+            </div>
+          </div>
+          <img src="lei-about-voicewave.gif" />
+
+
+          
+          </div>
+        </div>
+      </section>
+
+      <!-- Expertise -->
+      <section id="expertise" class="fade-in">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-eyebrow">Expertise</div>
+            <h2 class="section-title">我的專業價值</h2>
+            <p class="section-subtitle">
+              不只是做「一張美美的視覺」，而是從策略到落地，一段完整的設計旅程。
+            </p>
+          </div>
+
+          <div class="grid-3">
+            <article class="card">
+              <div class="card-eyebrow">Brand & Visual</div>
+              <div class="card-title">品牌識別與視覺系統</div>
+              <div class="card-body">
+                從品牌定位、關鍵視覺到應用物設計（型錄、DM、攤位），維持一致的品牌語言。
+              </div>
+              <div class="card-tags">
+                <span class="card-tag-pill">Logo / VI</span>
+                <span class="card-tag-pill">Brand System</span>
+                <span class="card-tag-pill">Print Collateral</span>
+              </div>
+              <img src="expertise-02.gif" />
+            </article>
+
+            <article class="card">
+              <div class="card-eyebrow">Web & Product</div>
+              <div class="card-title">網站與介面體驗設計</div>
+              <div class="card-body">
+                競品分析、資訊架構整理、頁面導覽與互動細節，提升訪客的使用者體驗。
+              </div>
+              <div class="card-tags">
+                <span class="card-tag-pill">Landing Page</span>
+                <span class="card-tag-pill">UX Flow</span>
+                <span class="card-tag-pill">RWD Layout</span>
+              </div>
+              <img src="expertise-01.gif" />
+            </article>
+
+            <article class="card">
+              <div class="card-eyebrow">Motion & AI</div>
+              <div class="card-title">動態設計與 AI 內容整合</div>
+              <div class="card-body">
+                透過 Motion Graphic、AI 生成圖片與影片，視覺化抽象概念，縮短提案到產出的距離。
+              </div>
+              <div class="card-tags">
+                <span class="card-tag-pill">Motion Graphic</span>
+                <span class="card-tag-pill">AI Image / Video</span>
+                <span class="card-tag-pill">Storytelling</span>
+              </div>
+              <img src="expertise-03.gif" />
+            </article>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- Selected Work -->
+      <section id="work" class="fade-in">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-eyebrow">Selected Work</div>
+            <h2 class="section-title">2025 代表作品精選</h2>
+            <p class="section-subtitle">
+              從平面到影片，展場、網站，到 AI 圖像與影像工作流程。
+            </p>
+          </div>
+
+          <div class="work-grid">
+  <!-- 01 -->
+  <article class="work-card work-01"
+    data-modal-title="Motion Graphic 影片製作"
+    data-modal-type="video"
+    data-modal-src="https://www.youtube.com/embed/pVdESwbtSXk?si=y27MMpsGaxE8mP5J">
+    <div class="work-thumb" aria-hidden="true"></div>
+    <div class="work-body">
+      <div class="work-title-row">
+        <div class="work-title">Motion Graphic 影片製作</div>
+        <div class="work-year">2025</div>
+      </div>
+      <p class="work-desc">
+        為企業製作服務流程影片，整合資訊、品牌語氣與動態節奏，讓技術內容在短時間內被看懂。
+      </p>
+      <div class="work-meta-row">
+        <div class="work-tags">
+          <span class="work-tag">Storyboard</span>
+          <span class="work-tag">2D Motion</span>
+          <span class="work-tag">Data Visualization</span>
+        </div>
+        <div class="work-role">Art & Motion Direction</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 -->
+  <article class="work-card work-02"
+    data-modal-title="精裝本型錄與年鑑"
+    data-modal-type="image"
+    data-modal-items="image|work-02-slide-ds.png,
+                      image|work-02-slide-mfc.png">
+    <div class="work-thumb" aria-hidden="true"></div>
+    <div class="work-body">
+      <div class="work-title-row">
+        <div class="work-title">精裝本型錄與年鑑</div>
+        <div class="work-year">2025</div>
+      </div>
+      <p class="work-desc">
+        將吊扇產品置入各式室內情境，以 AI 渲染與後製合成打造高質感空間照。結合資訊設計、照片與零件等素材，成為對外展會的行銷工具。
+      </p>
+      <div class="work-meta-row">
+        <div class="work-tags">
+          <span class="work-tag">Photo Compositing</span>
+          <span class="work-tag">Editorial Layout</span>
+          <span class="work-tag">Print Production</span>
+        </div>
+        <div class="work-role">Visual & Layout Design</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 -->
+  <article class="work-card work-03"
+    data-modal-title="AI 圖片生成"
+    data-modal-type="image"
+    data-modal-src="work-03-slide.png">
+    <div class="work-thumb" aria-hidden="true"></div>
+    <div class="work-body">
+      <div class="work-title-row">
+        <div class="work-title">AI 圖片生成</div>
+        <div class="work-year">2025</div>
+      </div>
+      <p class="work-desc">
+        規劃並測試 Freepik、Recraft 等多種 AI 工具，並在實際運用後產出SOP。
+      </p>
+      <div class="work-meta-row">
+        <div class="work-tags">
+          <span class="work-tag">AI Visual Development</span>
+          <span class="work-tag">Prompt Engineering</span>
+          <span class="work-tag">Workflow Optimization</span>
+        </div>
+        <div class="work-role">Design & Workflow</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 04 -->
+  <article class="work-card work-04"
+    data-modal-title="AI 影片應用"
+    data-modal-type="video"
+    data-modal-items="image|work-video-01.png,
+                      video|https://www.youtube.com/embed/D-t1Ho9Lpxg?si=bG3fQe-9nZXHeHlw,
+                      video|https://www.youtube.com/embed/5QuN1XYQof8?si=KkOquNGafLCWYp3D">
+    <div class="work-thumb" aria-hidden="true"></div>
+    <div class="work-body">
+      <div class="work-title-row">
+        <div class="work-title">AI 影片應用</div>
+        <div class="work-year">2025</div>
+      </div>
+      <p class="work-desc">
+        從腳本發想、分鏡建議到影片素材的生成製作，藉由 AI 協作，降低製作時間與成本。
+      </p>
+      <div class="work-meta-row">
+        <div class="work-tags">
+          <span class="work-tag">Storyboardinge</span>
+          <span class="work-tag">AI Video Generation</span>
+          <span class="work-tag">Production Efficiency</span>
+        </div>
+        <div class="work-role">Design & Workflow</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 05 -->
+  <article class="work-card work-05"
+    data-modal-title="網站平台化"
+    data-modal-type="image"
+    data-modal-src="work-05-slide.png"
+    data-modal-link-label="View Full Website"
+    data-modal-link="https://teamsworld.com/">
+    <div class="work-thumb" aria-hidden="true"></div>
+    <div class="work-body">
+      <div class="work-title-row">
+        <div class="work-title">網站平台化</div>
+        <div class="work-year">2025</div>
+      </div>
+      <p class="work-desc">
+        重整網站架構，從「工廠導向」轉為「平台導向」敘事，設計新的首頁、新增頁面，讓國際客戶更快理解供應鏈服務價值。
+      </p>
+      <div class="work-meta-row">
+        <div class="work-tags">
+          <span class="work-tag">UI & UX</span>
+          <span class="work-tag">Web Design</span>
+          <span class="work-tag">Conversion Design</span>
+        </div>
+        <div class="work-role">UX & Visual Design</div>
+      </div>
+    </div>
+  </article>
+
+  <!-- 06 -->
+  <article class="work-card work-06"
+    data-modal-title="展會"
+    data-modal-type="image"
+    data-modal-src="work-06-slide.png">
+    <div class="work-thumb" aria-hidden="true"></div>
+    <div class="work-body">
+      <div class="work-title-row">
+        <div class="work-title">展會</div>
+        <div class="work-year">2025</div>
+      </div>
+      <p class="work-desc">
+        協助各項活動：校園徵才、好感空間展、國外展會之攤位設計，讓品牌在不同場域維持一致調性。
+      </p>
+      <div class="work-meta-row">
+        <div class="work-tags">
+          <span class="work-tag">Campaign Visual</span>
+          <span class="work-tag">Exhibition</span>
+          <span class="work-tag">Employer Brand</span>
+        </div>
+        <div class="work-role">Visual Design</div>
+      </div>
+    </div>
+  </article>
+</div>
+
+        </div>
+      </section>
+
+
+      <!-- Rocjet -->
+<section class="section-divider fade-in" aria-hidden="true">
+  <div class="container">
+    <div class="divider-gif">
+      <img src="rocket.gif" alt="" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+
+
+      <!-- AI Efficiency -->
+      <section id="testimonials" class="fade-in">
+        <div class="container">
+          <div class="section-header">
+            <div class="section-eyebrow">AI Workflow</div>
+            <h2 class="section-title">2024 → 2025 工作效率變化</h2>
+            <p class="section-subtitle">
+              2024 以前多數流程仍以人工繪製、剪輯與排版為主；2025 開始大量導入 AI 工具（圖像、影片與腳本輔助），
+              保有品質（甚至是提升），實際提高了整體產出的效率。
+            </p>
+          </div>
+
+          <div class="efficiency-grid">
+            <article class="efficiency-card">
+              <div class="eff-metric-label">視覺探索與圖片素材製作速度</div>
+              <div class="eff-number-row"><span class="eff-tag">2024（無 AI）</span><span class="eff-value">1×</span></div>
+              <div class="eff-number-row"><span class="eff-tag eff-tag-2025">2025（AI 輔助）</span><span class="eff-value">約 1.7×</span></div>
+              <div class="eff-bar-track">
+                <div class="eff-bar eff-bar-2024"></div>
+                <div class="eff-bar eff-bar-2025 eff-bar-2025-70"></div>
+              </div>
+              <p class="eff-note">使用 Freepik / Midjourney 等工具快速產出多中素材圖片，讓短缺的圖片素材庫增量 40–70%。</p>
+            </article>
+
+            <article class="efficiency-card">
+              <div class="eff-metric-label">影片腳本與影片素材準備效率</div>
+              <div class="eff-number-row"><span class="eff-tag">2024（無 AI）</span><span class="eff-value">1×</span></div>
+              <div class="eff-number-row"><span class="eff-tag eff-tag-2025">2025（AI 輔助）</span><span class="eff-value">約 1.6×</span></div>
+              <div class="eff-bar-track">
+                <div class="eff-bar eff-bar-2024"></div>
+                <div class="eff-bar eff-bar-2025 eff-bar-2025-65"></div>
+              </div>
+              <p class="eff-note">透過 AI 協助拆解腳本、協助構想分鏡，並生成部分影音素材，影片專案製作效率提升約 35–60%。</p>
+            </article>
+
+            <article class="efficiency-card">
+              <div class="eff-metric-label">網站與版面迭代效率</div>
+              <div class="eff-number-row"><span class="eff-tag">2024（無 AI）</span><span class="eff-value">1×</span></div>
+              <div class="eff-number-row"><span class="eff-tag eff-tag-2025">2025（AI 輔助）</span><span class="eff-value">約 1.5×</span></div>
+              <div class="eff-bar-track">
+                <div class="eff-bar eff-bar-2024"></div>
+                <div class="eff-bar eff-bar-2025"></div>
+              </div>
+              <p class="eff-note">利用 AI 產出 wireframe 草稿（雖然不優）、文案初稿與 CSS 建議，透過 Vibe Coding 方式呈現更多可能。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+<!-- Ending · Hero-style Section -->
+<section id="contact" class="fade-in ending-section">
+  <!-- 背景圖（會隨捲動淡入＋位移） -->
+  <div class="ending-bg" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="ending-inner">
+<h2 class="ending-title">
+  DESIGN WITH <span class="accent-text">PURPOSE</span>. BUILD WITH <span class="accent-text">CLARITY</span>.
+</h2>
+      <p class="ending-body">
+        2025 對我來說，是從「設計師」走向「整合者」的一年。<br>
+        從影像、網站、動態到 AI，期待透過更多合作，把複雜的資訊整理成更清晰、可被看懂、可被使用的設計成果。
+      </p>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+      <div class="tw-modal" id="workModal" aria-hidden="true">
+  <div class="tw-modal__backdrop" data-close></div>
+
+  <div class="tw-modal__panel" role="dialog" aria-modal="true" aria-labelledby="twModalTitle">
+    <button class="tw-modal__close" type="button" aria-label="Close" data-close>✕</button>
+
+    <div class="tw-modal__header">
+      <h3 class="tw-modal__title" id="twModalTitle">Work Title</h3>
+    </div>
+
+    <div class="tw-modal__body" id="twModalBody">
+      <!-- JS 動態塞 image / video -->
+    </div>
+  </div>
+</div>
+
+    </main>
+  </div>
+
+  <script>
+    // Scroll-in（下方區塊）
+    document.addEventListener("DOMContentLoaded", () => {
+      const fadeEls = document.querySelectorAll(".fade-in");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      fadeEls.forEach((el) => observer.observe(el));
+    });
+
+    // Hero 圖片淡入：只做「加上 body.scrolled」這件事（乾淨、不會出錯）
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 10) document.body.classList.add("scrolled");
+      else document.body.classList.remove("scrolled");
+    }, { passive: true });
+  </script>
+
+  <script>
+  (function(){
+    const modal   = document.getElementById("workModal");
+    const titleEl = document.getElementById("twModalTitle");
+    const bodyEl  = document.getElementById("twModalBody");
+
+    let lastFocus = null;
+    let modalItems = [];    // [{type, src}, ...]
+    let currentIndex = 0;
+
+    function renderItem(index){
+      if (!modalItems.length) return;
+      currentIndex = index;
+
+      // 清空 body，建立 carousel 結構
+      bodyEl.innerHTML = "";
+
+      const carousel = document.createElement("div");
+      carousel.className = "tw-modal__carousel";
+
+      const prevBtn = document.createElement("button");
+      prevBtn.type = "button";
+      prevBtn.className = "tw-modal__nav tw-modal__nav--prev";
+      prevBtn.setAttribute("aria-label", "Previous");
+      prevBtn.textContent = "‹";
+
+      const nextBtn = document.createElement("button");
+      nextBtn.type = "button";
+      nextBtn.className = "tw-modal__nav tw-modal__nav--next";
+      nextBtn.setAttribute("aria-label", "Next");
+      nextBtn.textContent = "›";
+
+      const mediaWrap = document.createElement("div");
+      mediaWrap.className = "tw-modal__media";
+
+      // 根據當前 item 建立內容
+      const item = modalItems[currentIndex];
+      if (item.type === "video") {
+        const iframe = document.createElement("iframe");
+        iframe.src = item.src;
+        iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        mediaWrap.appendChild(iframe);
+      } else if (item.type === "mp4") {
+        const video = document.createElement("video");
+        video.src = item.src;
+        video.controls = true;
+        video.playsInline = true;
+        mediaWrap.appendChild(video);
+      } else {
+  const wrapper = document.createElement("div");
+  wrapper.style.display = "flex";
+  wrapper.style.flexDirection = "column";
+  wrapper.style.gap = "12px";
+
+  const img = document.createElement("img");
+  img.src = item.src;
+  img.alt = titleEl.textContent || "Work image";
+  wrapper.appendChild(img);
+
+  // 如果卡片內有 data-modal-link，就加入超連結
+  const link = modalItems[currentIndex].link;
+  if (link) {
+    const a = document.createElement("a");
+    a.href = link;
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+    a.textContent = modalItems[currentIndex].label || "View more ↗";
+    a.style.fontSize = "14px";
+    a.style.color = "var(--accent)";
+    a.style.textDecoration = "none";
+    a.style.alignSelf = "flex-start";
+    a.style.border = "1px solid rgba(111,182,233,.3)";
+    a.style.borderRadius = "8px";
+    a.style.padding = "6px 10px";
+    a.style.background = "rgba(111,182,233,.08)";
+    a.style.transition = "all .18s";
+    a.addEventListener("mouseenter",()=>{ a.style.background = "rgba(111,182,233,.18)"; });
+    a.addEventListener("mouseleave",()=>{ a.style.background = "rgba(111,182,233,.08)"; });
+    wrapper.appendChild(a);
+  }
+
+  mediaWrap.appendChild(wrapper);
+}
+
+
+      // 若只有一個 item，就 disable 箭頭
+      if (modalItems.length <= 1) {
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+
+      // 綁定左右切換
+      prevBtn.addEventListener("click", () => {
+        if (modalItems.length <= 1) return;
+        const nextIndex = (currentIndex - 1 + modalItems.length) % modalItems.length;
+        renderItem(nextIndex);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (modalItems.length <= 1) return;
+        const nextIndex = (currentIndex + 1) % modalItems.length;
+        renderItem(nextIndex);
+      });
+
+      carousel.appendChild(prevBtn);
+      carousel.appendChild(mediaWrap);
+      carousel.appendChild(nextBtn);
+
+      bodyEl.appendChild(carousel);
+    }
+
+    function openModalFromCard(card){
+  lastFocus = document.activeElement;
+
+  const title = card.dataset.modalTitle || "Selected Work";
+  const baseType = card.dataset.modalType || "image";
+
+  // ✅ 最高優先：data-modal-items（可混合 video / image / mp4）
+  if (card.dataset.modalItems) {
+    modalItems = card.dataset.modalItems
+      .split(",")
+      .map(s => s.trim())
+      .filter(Boolean)
+      .map(chunk => {
+        // chunk 形如 "video|https://...." 或 "image|xxx.png"
+        const [typePart, srcPart] = chunk.split("|").map(x => x.trim());
+        return {
+          type: typePart || baseType,  // 若沒寫 type，就 fallback 到 baseType
+          src: srcPart
+        };
+      });
+
+  // 🟦 其次：多個同型態（原本的 data-modal-srcs）
+} else if (card.dataset.modalSrc) {
+  modalItems = [{
+    type: baseType,
+    src: card.dataset.modalSrc,
+    link: card.dataset.modalLink || null,
+    label: card.dataset.modalLinkLabel || null
+  }];
+
+
+
+  // 🟦 再來：單一 media（原本的 data-modal-src）
+  } else if (card.dataset.modalSrc) {
+    modalItems = [{
+      type: baseType,
+      src: card.dataset.modalSrc
+    }];
+
+  // 沒有任何 src，就不開
+  } else {
+    return;
+  }
+
+  titleEl.textContent = title;
+  renderItem(0);
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+
+  const closeBtn = modal.querySelector("[data-close]");
+  closeBtn && closeBtn.focus();
+}
+
+    function closeModal(){
+      modal.classList.remove("is-open");
+      modal.setAttribute("aria-hidden", "true");
+      bodyEl.innerHTML = "";
+      document.body.style.overflow = "";
+      modalItems = [];
+      currentIndex = 0;
+      if (lastFocus) lastFocus.focus();
+    }
+
+    // 讓整張卡片可點
+    document.querySelectorAll(".work-card").forEach(card => {
+      card.style.cursor = "pointer";
+      card.setAttribute("role","button");
+      card.setAttribute("tabindex","0");
+
+      const handler = () => openModalFromCard(card);
+
+      card.addEventListener("click", handler);
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handler();
+        }
+      });
+    });
+
+    // 關閉：點背景、關閉鈕
+    modal.addEventListener("click", (e) => {
+      if (e.target.matches("[data-close]") || e.target.classList.contains("tw-modal__backdrop")) {
+        closeModal();
+      }
+    });
+
+    // 關閉：ESC
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("is-open")) {
+        closeModal();
+      }
+
+      // 左右方向鍵切換影片
+      if (!modalItems.length || !modal.classList.contains("is-open")) return;
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        const nextIndex = (currentIndex - 1 + modalItems.length) % modalItems.length;
+        renderItem(nextIndex);
+      }
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        const nextIndex = (currentIndex + 1) % modalItems.length;
+        renderItem(nextIndex);
+      }
+    });
+  })();
+</script>
+
+
+
+  <script src="all.js"></script>
+</body>
+</html>
