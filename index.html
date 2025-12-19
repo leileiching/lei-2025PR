@@ -969,6 +969,67 @@
 
 
 
+/* 整個 Contact 當成滿版 hero */
+.contact-section{
+  position: relative;
+  width: 100%;
+  min-height: 90vh;
+  padding: 0;
+  overflow: hidden;
+
+  background-color: var(--bg);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 背景層，放 canvas 用 */
+.contact-bg{
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* 讓 canvas 吃滿整個區塊 */
+#contactParticles{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 內文層：置中＋上下留呼吸空間 */
+.contact-inner{
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 120px 20px;
+}
+
+.contact-title{
+  margin: 0 0 18px;
+  font-size: clamp(26px, 4vw, 34px);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+/* PURPOSE / CLARITY 換色 */
+.contact-title .accent{
+  color: #6fb6e9;
+}
+
+.contact-body{
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--text-sub);
+}
+
+
+
+
   </style>
 </head>
 
@@ -1333,22 +1394,28 @@
       </section>
 
 <!-- Ending · Hero-style Section -->
-<section id="contact" class="fade-in ending-section">
-  <!-- 背景圖（會隨捲動淡入＋位移） -->
-  <div class="ending-bg" aria-hidden="true"></div>
+<!-- Contact -->
+<section id="contact" class="fade-in contact-section">
+  <!-- 粒子背景層 -->
+  <div class="contact-bg" aria-hidden="true">
+    <canvas id="contactParticles"></canvas>
+  </div>
 
+  <!-- 文字內容層 -->
   <div class="container">
-    <div class="ending-inner">
-<h2 class="ending-title">
-  DESIGN WITH <span class="accent-text">PURPOSE</span>. BUILD WITH <span class="accent-text">CLARITY</span>.
+    <div class="contact-inner">
+      <h2 class="contact-title">
+  DESIGN WITH <span class="accent">PURPOSE</span>. BUILD WITH <span class="accent">CLARITY</span>.
 </h2>
-      <p class="ending-body">
-        2025 對我來說，是從「設計師」走向「整合者」的一年。<br>
+
+      <p class="contact-body">
+        2025 對我來說，是從「設計師」走向「整合者」的一年。<br />
         從影像、網站、動態到 AI，期待透過更多合作，把複雜的資訊整理成更清晰、可被看懂、可被使用的設計成果。
       </p>
     </div>
   </div>
 </section>
+
 
 
 
@@ -1619,6 +1686,85 @@
     });
   })();
 </script>
+
+<script>
+(function(){
+  const section = document.getElementById("contact");
+  const canvas  = document.getElementById("contactParticles");
+  if (!section || !canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  let dpr = window.devicePixelRatio || 1;
+  let particles = [];
+  const PARTICLE_COUNT = 70;
+
+  function resizeCanvas() {
+    const rect = section.getBoundingClientRect();
+    canvas.width  = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width  = rect.width + "px";
+    canvas.style.height = rect.height + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  function createParticles(){
+    particles = [];
+    const rect = section.getBoundingClientRect();
+    const w = rect.width;
+    const h = rect.height;
+
+    for (let i = 0; i < PARTICLE_COUNT; i++){
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: 0.8 + Math.random() * 2,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        alpha: 0.25 + Math.random() * 0.6
+      });
+    }
+  }
+
+  function draw(){
+    const w = canvas.width  / dpr;
+    const h = canvas.height / dpr;
+
+    ctx.clearRect(0, 0, w, h);
+
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // 從邊界出去就從另一側回來（環狀）
+      if (p.x < 0) p.x += w;
+      if (p.x > w) p.x -= w;
+      if (p.y < 0) p.y += h;
+      if (p.y > h) p.y -= h;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(111,182,233," + p.alpha + ")";
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  function init(){
+    resizeCanvas();
+    createParticles();
+    draw();
+  }
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    createParticles();
+  });
+
+  init();
+})();
+</script>
+
 
 
 
